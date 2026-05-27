@@ -27,12 +27,36 @@ public class CorsConfig {
         ));
 
         config.setAllowedHeaders(List.of("*"));
+        config.setExposedHeaders(List.of("Authorization"));
         config.setAllowCredentials(true);
+        config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/api/**", config);
 
         return new CorsFilter(source);
+    }
+
+     @Bean
+     public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(Arrays.asList(
+            "http://localhost:4200",
+            "http://localhost:4201"
+        ));
+        config.setAllowedMethods(Arrays.asList(
+            "GET", "POST", "PUT",
+            "DELETE", "PATCH", "OPTIONS"
+        ));
+        config.setAllowedHeaders(List.of("*"));
+        config.setExposedHeaders(List.of("Authorization"));
+        config.setAllowCredentials(true);
+        config.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source =
+            new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
     }
 }

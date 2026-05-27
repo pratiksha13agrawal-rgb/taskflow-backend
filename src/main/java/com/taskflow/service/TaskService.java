@@ -47,16 +47,19 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public Task updateTask(
-            Long id, TaskRequest req, String email) {
+    public Task updateTask(Long id, TaskRequest req, String email) {
 
         Task task = getTaskById(id, email);
         task.setTitle(req.getTitle());
         task.setDescription(req.getDescription());
-        task.setPriority(Task.Priority.valueOf(
-                req.getPriority()));
-        task.setStatus(Task.TaskStatus.valueOf(
-                req.getStatus()));
+        
+        if (req.getPriority() != null) {
+            task.setPriority(Task.Priority.valueOf(req.getPriority()));
+        }
+        if (req.getStatus() != null) {
+           task.setStatus(Task.TaskStatus.valueOf(req.getStatus()));
+        }
+        
         task.setCategory(req.getCategory());
         task.setDueDate(req.getDueDate());
         task.setDone(req.isDone());
