@@ -61,7 +61,9 @@ public class TaskService {
         }
         
         task.setCategory(req.getCategory());
-        task.setDueDate(req.getDueDate());
+        if (req.getDueDate() != null) {
+            task.setDueDate(req.getDueDate());
+        }
         task.setDone(req.isDone());
         task.setTags(req.getTags());
 

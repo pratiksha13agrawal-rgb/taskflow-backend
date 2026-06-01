@@ -1,5 +1,6 @@
 package com.taskflow.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,6 +32,7 @@ public class Note {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({"notes", "tasks", "password", "active", "hibernateLazyInitializer"})
     private User user;
 
     @CreationTimestamp
