@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "habit_entries")
 @Data
@@ -24,5 +26,6 @@ public class HabitEntry {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "habit_id", nullable = false)
+    @JsonIgnoreProperties({"entries", "user", "hibernateLazyInitializer"})
     private Habit habit;
 }
