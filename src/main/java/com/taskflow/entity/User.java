@@ -32,11 +32,17 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @NotBlank
+    // @NotBlank
+    @JsonIgnore
     private String password;
 
     private String avatar;
+    private String bio;
+    private String phone;
+    private String location;
+    private String website;
 
+    @JsonIgnore
     @Column(name = "is_active")
     private boolean active = true;
 
@@ -55,4 +61,8 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Note> notes;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Habit> habits;
 }
